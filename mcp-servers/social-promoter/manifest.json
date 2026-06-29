@@ -1,0 +1,127 @@
+{
+  "manifest_version": "0.3",
+  "name": "social-promoter-mcp",
+  "display_name": "Social Promoter",
+  "version": "0.1.0",
+  "description": "Draft tone-aware social posts in your own voice from a blog post or coding session, and publish to X behind an explicit cost and approval gate.",
+  "long_description": "Social Promoter gives any agent the deterministic half of a social-promotion workflow. It finds your latest post and samples your real prose, returns a voice profile you maintain so drafts sound like you, lints drafts against your voice rules, estimates the paid X API cost, and publishes only behind an explicit confirmation gate. Drafting is free and local. Publishing is the only step that spends money and it never fires without your go-ahead on the exact text. Connect X once and your credentials travel across every workspace.",
+  "author": {
+    "name": "Thor Draper Jr",
+    "url": "https://thor-draperjr.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thor-draperjr/social-promoter-mcp.git"
+  },
+  "homepage": "https://thor-draperjr.github.io",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "copilot",
+    "agent",
+    "social",
+    "blog",
+    "x",
+    "twitter"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "X_API_KEY": "${user_config.x_api_key}",
+        "X_API_SECRET": "${user_config.x_api_secret}",
+        "X_ACCESS_TOKEN": "${user_config.x_access_token}",
+        "X_ACCESS_SECRET": "${user_config.x_access_secret}",
+        "SOCIAL_PROMOTER_POSTS_DIR": "${user_config.posts_dir}",
+        "SOCIAL_PROMOTER_SITE_URL": "${user_config.site_url}",
+        "SOCIAL_PROMOTER_VOICE_FILE": "${user_config.voice_file}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "find_latest_post",
+      "description": "Find the newest post and return full bodies as tone samples."
+    },
+    {
+      "name": "get_voice_profile",
+      "description": "Return the author's maintained voice profile and corpus summary."
+    },
+    {
+      "name": "lint_voice",
+      "description": "Check a draft against the voice rules and return structured violations."
+    },
+    {
+      "name": "estimate_cost",
+      "description": "Estimate the paid X API cost of publishing a post."
+    },
+    {
+      "name": "publish_post",
+      "description": "Publish an approved post to X behind an explicit confirmation gate."
+    }
+  ],
+  "tools_generated": false,
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "posts_dir": {
+      "type": "directory",
+      "title": "Posts directory",
+      "description": "Folder of your published markdown posts. Used to sample your writing voice and find the latest post. Optional; you can also pass it per request.",
+      "required": false
+    },
+    "site_url": {
+      "type": "string",
+      "title": "Public site URL",
+      "description": "Base URL of your blog (e.g. https://you.github.io), used to build article links. Optional.",
+      "required": false
+    },
+    "voice_file": {
+      "type": "file",
+      "title": "Voice profile file",
+      "description": "Path to your maintained voice profile (voice.md). Optional; the server also looks in the workspace and in ~/.social-promoter/voice.md.",
+      "required": false
+    },
+    "x_api_key": {
+      "type": "string",
+      "title": "X API Key",
+      "description": "Consumer key from your X developer app. Only needed to publish. Leave blank to draft only, or to connect later with the login command.",
+      "sensitive": true,
+      "required": false
+    },
+    "x_api_secret": {
+      "type": "string",
+      "title": "X API Key Secret",
+      "description": "Consumer secret from your X developer app.",
+      "sensitive": true,
+      "required": false
+    },
+    "x_access_token": {
+      "type": "string",
+      "title": "X Access Token",
+      "description": "Access token from your X developer app (Read and Write).",
+      "sensitive": true,
+      "required": false
+    },
+    "x_access_secret": {
+      "type": "string",
+      "title": "X Access Token Secret",
+      "description": "Access token secret from your X developer app.",
+      "sensitive": true,
+      "required": false
+    }
+  }
+}

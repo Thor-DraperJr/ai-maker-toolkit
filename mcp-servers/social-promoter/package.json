@@ -1,0 +1,40 @@
+{
+    "name": "social-promoter-mcp",
+    "version": "0.1.0",
+    "description": "Portable MCP server that gives any Copilot/agent session the deterministic half of a social-promotion workflow: find a post, sample tone, lint copy against voice rules, estimate posting cost, and gate publishing behind explicit approval.",
+    "type": "module",
+    "bin": {
+        "social-promoter-mcp": "dist/index.js"
+    },
+    "files": [
+        ".env.example",
+        "dist",
+        "templates"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "test": "node --test",
+        "smoke": "node scripts/smoke.mjs",
+        "bundle": "node scripts/bundle.mjs"
+    },
+    "keywords": [
+        "mcp",
+        "copilot",
+        "agent",
+        "social",
+        "blog"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.12.0",
+        "gray-matter": "^4.0.3",
+        "twitter-api-v2": "^1.29.0",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@anthropic-ai/mcpb": "^2.1.2",
+        "@types/node": "^20.14.0",
+        "typescript": "^5.5.0"
+    }
+}

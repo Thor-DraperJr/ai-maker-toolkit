@@ -1,0 +1,17 @@
+node_modules/
+.artifacts/
+workspace/
+dist/
+build/
+.env
+.env.*
+!.env.example
+.social-promoter/
+credentials.json
+*.key
+*.pem
+*.p12
+*.pfx
+.DS_Store
+*.log
+*.mcpb
